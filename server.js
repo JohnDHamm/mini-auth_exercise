@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const routes = require('./routes/')
 
 const app = express();
 
@@ -17,18 +18,22 @@ app.use(express.static('public'));
 
 
 //routes
-app.get('/', (req, res) => {
-	res.render('index')
-})
+app.use(routes);
+// app.get('/', (req, res) => {
+// 	res.render('index')
+// })
 
-app.get('/login', (req, res) => {
-	res.render('login')
-})
+// app.get('/login', (req, res) => {
+// 	res.render('login')
+// })
 
-app.get('/register', (req, res) => {
-	res.render('register')
-})
+// app.get('/register', (req, res) => {
+// 	res.render('register')
+// })
 
+// app.get('/logout', (req, res) => {
+// 	res.render('logout')
+// })
 
 
 app.listen(PORT, () => console.log(`Express server listening on port: ${PORT}`))
