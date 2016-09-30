@@ -2,6 +2,8 @@
 
 const express = require('express');
 const routes = require('./routes/')
+const { connect } = require('./database')
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -15,25 +17,18 @@ app.set('view engine', 'pug');
 
 //middlewares
 app.use(express.static('public'));
-
+app.use(bodyParser.urlencoded({extended: false}));
 
 //routes
 app.use(routes);
-// app.get('/', (req, res) => {
-// 	res.render('index')
-// })
-
-// app.get('/login', (req, res) => {
-// 	res.render('login')
-// })
-
-// app.get('/register', (req, res) => {
-// 	res.render('register')
-// })
-
-// app.get('/logout', (req, res) => {
-// 	res.render('logout')
-// })
 
 
-app.listen(PORT, () => console.log(`Express server listening on port: ${PORT}`))
+
+connect()
+  .then(() => {
+    app.listen(PORT, () =>
+      console.log(`Listening on port: ${PORT}`)
+    )
+  })
+  .catch(console.error)
+
