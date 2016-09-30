@@ -1,13 +1,21 @@
 'use strict';
 
 const { Router } = require('express');
-// const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const router = Router();
-const bcrypt = require('bcrypt')
 
 const User = require('../models/user')
 
+
+// login guard middleware
+// router.use((req, res, next) => {
+// 	if (req.session.email) {
+// 		next()
+// 	} else {
+// 		res.redirect('/login')
+// 	}
+// })
 
 router.get('/', (req, res) => {
 	res.render('index')
@@ -36,8 +44,7 @@ router.post('/login', ({ session, body: { email, password } }, res, err) => {
 		})
 		.then((matches) => {
 			if (matches) {
-				// session.email = email
-				console.log("user logged in: ", email);
+				session.email = email
 				res.redirect('/')
 			} else {
 				res.render('login', { msg: 'Password does not match' })
@@ -75,6 +82,8 @@ router.post('/register', ({ body: { email, password, confirmation } }, res, err)
 		res.render('register', { msg: 'Password & password confirmation do not match' })
 	}
 })
+
+
 
 // app.get('/logout', (req, res) => {
 // 	res.render('logout')
