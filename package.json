@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Mini Assignment Requirements: Route 1: “/” h1 welcome <a@b.com> Route 2: input email - input pw - submit Route 3: “/register”  input email - input pw - submit Route 4: /logout Deployed",
   "main": "server.js",
+  "engines": {
+    "node": "6",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
