@@ -28,6 +28,7 @@ router.get('/login', (req, res) => {
 router.post('/login', ({ session, body: { email, password } }, res, err) => {
 	User.findOne({ email })
 		.then((user) => {
+			console.log("user:", user);
 			if (user) {
 				return new Promise((resolve, reject) => {
 					bcrypt.compare(password, user.password, (err, matches) => {
